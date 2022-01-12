@@ -42,5 +42,8 @@ for url in tqdm(image_urls[args["from"]:args["to"]]):
         ssl_error_urls.append(url)
         print(f"Something happended while sending request to {url}")
 
-json.dump(notfound_urls, open(f"not_found_url_{args['from']}_{args['to']}.json", "w"))
-json.dump(ssl_error_urls, open(f"error_url_{args['from']}_{args['to']}.json", "w"))
+if len(notfound_urls) > 0:
+    json.dump(notfound_urls, open(f"not_found_url_{args['from']}_{args['to']}.json", "w"))
+
+if len(ssl_error_urls) > 0:
+    json.dump(ssl_error_urls, open(f"error_url_{args['from']}_{args['to']}.json", "w"))
