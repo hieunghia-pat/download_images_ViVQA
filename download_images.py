@@ -20,10 +20,13 @@ if not os.path.isdir("images"):
     os.mkdir("images")
 
 image_id = args["from"] 
+headers = {
+            'User-Agent': "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:95.0) Gecko/20100101 Firefox/95.0"
+        }
 for url in tqdm(image_urls[args["from"]:args["to"]]):
     url["Image_URL"] = re.sub(r":$", "", url["Image_URL"])
     try:
-        response = requests.get(url["Image_URL"], stream=True)
+        response = requests.get(url["Image_URL"], stream=True, headers=headers)
 
         if not response.ok:
             print(f"{url['Image_URL']} - {response}")
